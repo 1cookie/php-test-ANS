@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\PokedexController;
+use App\Http\Controllers\PokemonController;
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [PokedexController::class, 'index'])->name('pokedex.index');
+Route::get('/search', [PokedexController::class, 'search'])->name('pokedex.search');
+Route::get('/pokemon/{name}', [PokemonController::class, 'show'])->name('pokemon.show');
