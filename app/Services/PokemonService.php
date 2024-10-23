@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 class PokemonService
 {
+    protected $baseUrl = 'https://pokeapi.co/api/v2/';
+
     public function getAllPokemons()
     {
-        $response = Http::get('https://pokeapi.co/api/v2/pokemon?limit=100');
+        $response = Http::get($this->baseUrl . "pokemon?limit=100");
 
         if ($response->successful()) {
             return $response->json()['results'];
@@ -19,7 +21,7 @@ class PokemonService
 
     public function getPokemonByName($name)
     {
-        $response = Http::get("https://pokeapi.co/api/v2/pokemon/{$name}");
+        $response = Http::get($this->baseUrl . "pokemon/{$name}");
 
         if ($response->successful()) {
             return $response->json();
