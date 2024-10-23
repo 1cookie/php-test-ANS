@@ -3,7 +3,7 @@
     <button type="submit">Search</button>
 </form>
 
-@if (isset($filteredList))
+@if (isset($filteredList['results']) && !empty($filteredList['results']))
     @foreach ($filteredList['results'] as $pokemon)
         <div>
             <a href="{{ route('pokemon.show', ['name' => $pokemon['name']]) }}">
@@ -11,7 +11,7 @@
             </a>
         </div>
     @endforeach
-@else
+@elseif (isset($pokemonList['results']) && !empty($pokemonList['results']))
     @foreach ($pokemonList['results'] as $pokemon)
         <div>
             <a href="{{ route('pokemon.show', ['name' => $pokemon['name']]) }}">
@@ -19,4 +19,6 @@
             </a>
         </div>
     @endforeach
+@else
+    <p>No Pokémon found.</p>
 @endif
